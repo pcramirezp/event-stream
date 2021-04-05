@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <body>
+    <h1>Client Web</h1>
+    <a href="javascript:void" onclick="sendRequest()">Send Request</a>
+    <div id="response"></div>
+    <script>
+            function sendRequest(){
+                if(typeof(EventSource) !== "undefined") {
+                    var source = new EventSource("//localhost:8080/events");
+                    source.onmessage = function(event) {
+                        document.getElementById("response").innerHTML += event.data + "<br />";
+                    };
+                } else {
+                    document.getElementById("response").innerHTML = "Your browser does not support server-sent events.";
+                }
+            }
+            </script>
+    </body>
+</html>
